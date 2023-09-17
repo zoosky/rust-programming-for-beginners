@@ -19,14 +19,14 @@ struct Dimensions {
 }
 
 // * Use a struct to encapsulate the box characteristics
-struct ShoppingBox {
-    dimensions: Dimensions,
+struct ShoppingBox<'a> {
+    dimensions: &'a Dimensions,
     color: Color,
     weight: f32,
 }
 
-impl ShoppingBox {
-    fn new(dimensions: Dimensions, color: Color, weight: f32) -> Self {
+impl<'a> ShoppingBox<'a> {
+    fn new(dimensions: &'a Dimensions, color: Color, weight: f32) -> Self {
         Self {
             dimensions,
             color,
@@ -54,11 +54,11 @@ fn main() {
         height: 6.0,
     };
     let sbox1 = ShoppingBox {
-        dimensions: dim,
+        dimensions: &dim,
         color: Color::Red,
         weight: 34.5,
     };
-    let sbox2 = ShoppingBox::new(dim, Color::Green, 12.0);
+    let sbox2 = ShoppingBox::new(&dim, Color::Green, 12.0);
     sbox1.print_specification();
     sbox2.print_specification();
 }
