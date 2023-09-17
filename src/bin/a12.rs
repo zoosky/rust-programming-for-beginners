@@ -11,11 +11,29 @@ enum Color {
     Green,
     Blue,
 }
+impl Color {
+    fn print(&self) {
+        match self {
+            Color::Red => println!("Red"),
+            Color::Green => println!("Green"),
+            Color::Blue => println!("Blue"),
+        }
+    }
+}
 
 struct Dimensions {
     length: f32,
     width: f32,
     height: f32,
+}
+
+impl Dimensions {
+    fn print(&self) {
+        println!(
+            "Dimensions: {} x {} x {}",
+            self.length, self.width, self.height
+        );
+    }
 }
 
 // * Use a struct to encapsulate the box characteristics
@@ -34,12 +52,9 @@ impl<'a> ShoppingBox<'a> {
         }
     }
 
-    fn print_specification(&self) {
-        println!(
-            "Dimensions: {} x {} x {}",
-            self.dimensions.length, self.dimensions.width, self.dimensions.height
-        );
-        println!("Color: {:?}", self.color);
+    fn print(&self) {
+        self.dimensions.print();
+        self.color.print();
         println!("Weight: {}", self.weight);
     }
 }
@@ -59,6 +74,6 @@ fn main() {
         weight: 34.5,
     };
     let sbox2 = ShoppingBox::new(&dim, Color::Green, 12.0);
-    sbox1.print_specification();
-    sbox2.print_specification();
+    sbox1.print();
+    sbox2.print();
 }
